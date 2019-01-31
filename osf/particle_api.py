@@ -24,7 +24,17 @@ class particle_reader(data_reader):
         self.read(n)
         return parse_particle(self.data('particle_mcst'))
 
-
+    def events(self):
+        """
+        Iterate over events from particle reader
+        Args:
+            None
+        Yield:
+            particles (dict): particle information organized by key and associated array (index uniquely identify a particle)
+        """
+        for n in xrange(self.entry_count()):
+            yield self.get_event(n)
+    
 def get_particle(event, n):
     """
     Get individual particle from event
